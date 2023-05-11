@@ -25,8 +25,8 @@ The callback option is optional.  doCallbackIf is also optional, and only applic
 As matches are found (for example, right away if matching elements are immediately found), the imports object would maintain a read-only array of weak references, , along with the imported module:
 
 ```TypeScript
-interface ImportTargets {
-    weakReferences:  readonly WeakRef<Element>[];
+interface ModuleMatches extends EventTarget {
+    matches:  readonly WeakRef<Element>[];
     module: any;
 }
 ```
@@ -42,7 +42,7 @@ However, we could make the loading even more lazy by specifying intersection opt
 ```JavaScript
 const observer = conditionalImport({
    match: 'my-element',
-   intersectionObserverOptions: {
+   intersectionObserverInit: {
       rootMargin: "0px",
       threshold: 1.0,
    },
@@ -93,7 +93,7 @@ const observer = conditionalImport({
    match: 'my-element',
    loading: 'eager',
    import: async () => (await import('./my-element.js')),
-   callback: (import, match) => customElements.define(import.MyElement)
+   callback: (module, match) => customElements.define(import.MyElement)
 })
 ```
 
