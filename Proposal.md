@@ -101,6 +101,6 @@ The value of "loading" is 'lazy' by default.
 
 ## Bundling and subresource integrity
 
-I've raised this issue to a fellow standards proposer, who doesn't seem to think there's an issue there, when it comes to bundling.  "Import maps handles that" with a grand hand waving gesture.  Maybe that's right, but I have my doubts.  Those doubts increased when I saw [this slide](https://docs.google.com/presentation/d/1nBxZI4X6hVFct5t4VFCJqc4_j92nZtAxWqXDCottUus/edit#slide=id.g21eae6777da_0_63).
+I've raised this issue to a fellow declarative web component colleague, who doesn't seem to think there's an issue here, when it comes to bundling.  "Import maps handles that" with a grand hand waving gesture.  Maybe that's right, but I have my doubts.  Those doubts increased when I saw [this slide](https://docs.google.com/presentation/d/1nBxZI4X6hVFct5t4VFCJqc4_j92nZtAxWqXDCottUus/edit#slide=id.g21eae6777da_0_63).
 
-So I'm going to walk though, very slowly, and methodically, why I think the platform needs to provide a bit of a helping hand to bundlers, that import maps isn't enough.  My problem is I have not followed at all the approaches solutions like vite.js follow, so maybe they've found a way to overcome this issue (they don't seem to have raised a peep about it, so that increases my doubts that there's an issue).
+So I'm going to walk though, very slowly, and methodically, why I think the platform needs to provide a bit of a helping hand to bundlers, that import maps isn't enough. For my own benefit. My problem is I have not followed at all the approaches solutions like vite.js follow, so maybe they've found a way to overcome this issue (they don't seem to have raised a peep about it, so that increases my doubts that there's an issue).
