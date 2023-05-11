@@ -17,4 +17,5 @@ export interface ModuleMatchInit{
     loading?: 'lazy' | 'eager';
     doCallbackIf?: (module: any, matchingElement: Element) => boolean,
     callBack?: (module: any, matchingElement: Element) => void;
+    linkID?: string;
 }
