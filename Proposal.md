@@ -1,6 +1,6 @@
 What follows is a more ambitious alternative to [this proposal](https://github.com/w3c/webcomponents/issues/782).  The goals of this proposal are larger, and less focused on registering custom elements.
 
-The extra flexibility this new primitive would provide could be quite useful to things other than custom elements, such as implementing [custom enhancements](https://github.com/WICG/webcomponents/issues/1000) in userland.
+The extra flexibility this new primitive would provide could be quite useful to things other than custom elements, such as implementing [custom enhancements](https://github.com/WICG/webcomponents/issues/1000) in [userland](https://github.com/bahrus/be-exportable).
 
 We basically combine an easy-to-use mutation observer with the dynamic import:
 
@@ -9,9 +9,9 @@ const observer = conditionalImport({
    match: 'my-element',
    rootNode: myRootNode,
    import: async () => (await import('./my-element.js')),
-   callback: (import, match) => customElements.define(import.MyElement, match),
-   doCallbackIf: (import, match) => customElements.get(match) === undefined,
-})
+   callback: (module, match) => customElements.define(module.MyElement, match),
+   doCallbackIf: (module, match) => customElements.get(match) === undefined,
+});
 ```
 
 This proposal would also include support for CSS, JSON, HTML module imports.
@@ -35,7 +35,7 @@ This allows code that comes into being after the matching elements were found, t
 
 ##  Extra lazy loading
 
-By default, the matches would be reported as soon as an element matching the criterion is found or added into the DOM, inside the node specified by rootNode.
+By default, the matches would be reported, and the optional callback function invoked, as soon as an element matching the criterion is found or added into the DOM, inside the node specified by rootNode.
 
 However, we could make the loading even more lazy by specifying intersection options:
 
@@ -103,4 +103,7 @@ The value of "loading" is 'lazy' by default.
 
 I've raised this issue to a fellow declarative web component colleague, who doesn't seem to think there's an issue here, when it comes to bundling.  "Import maps handles that" with a grand hand waving gesture.  Maybe that's right, but I have my doubts.  Those doubts increased when I saw [this slide](https://docs.google.com/presentation/d/1nBxZI4X6hVFct5t4VFCJqc4_j92nZtAxWqXDCottUus/edit#slide=id.g21eae6777da_0_63).
 
-So I'm going to walk though, very slowly, and methodically, why I think the platform needs to provide a bit of a helping hand to bundlers, that import maps isn't enough. For my own benefit. My problem is I have not followed at all the approaches solutions like vite.js follow, so maybe they've found a way to overcome this issue (they don't seem to have raised a peep about it, so that increases my doubts that there's an issue).
+So I'm going to walk though, very slowly, and methodically, why I think the platform needs to provide a bit of a helping hand to bundlers, that import maps isn't enough. For my own benefit. My problem is I have not followed at all the approaches solutions like vite.js and system.js follow, so maybe they've found a way to overcome this issue (they don't seem to have raised a peep about it, so that increases my doubts that there's an issue).
+
+1.  Because script tags don't natively support exporting symbols, can't truly bundle in the HTML page.
+2.  
